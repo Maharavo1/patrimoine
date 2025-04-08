@@ -20,12 +20,12 @@ public final class FluxArgent extends Possession {
   private final int dateOperation;
 
   public FluxArgent(
-      String nom,
-      Compte compte,
-      LocalDate debut,
-      LocalDate fin,
-      int dateOperation,
-      Argent fluxMensuel) {
+          String nom,
+          Compte compte,
+          LocalDate debut,
+          LocalDate fin,
+          int dateOperation,
+          Argent fluxMensuel) {
     super(nom, LocalDate.MIN, new Argent(0, fluxMensuel.devise()));
     this.compte = compte;
     this.compte.addFinancés(this);
@@ -49,22 +49,22 @@ public final class FluxArgent extends Possession {
     }
 
     var valeurFutur =
-        debutOperationMinoréParDebut
-            .datesUntil(tFuturMajoréParFin.plusDays(1))
-            .filter(d -> d.getDayOfMonth() == dateOperation)
-            .sorted()
-            .map(d -> Pair.of(fluxMensuel, d))
-            // Addition must be done at a given time since Devise fluctuates
-            // TODO: test with Transfert between Compte with different Devise
-            .reduce(Pair.of(compte.valeurComptable, t), FluxArgent::add)
-            .first();
+            debutOperationMinoréParDebut
+                    .datesUntil(tFuturMajoréParFin.plusDays(1))
+                    .filter(d -> d.getDayOfMonth() == dateOperation)
+                    .sorted()
+                    .map(d -> Pair.of(fluxMensuel, d))
+                    // Addition must be done at a given time since Devise fluctuates
+                    // TODO: test with Transfert between Compte with different Devise
+                    .reduce(Pair.of(compte.valeurComptable, t), FluxArgent::add)
+                    .first();
     var argentFutur =
-        new Compte(compte.nom + " réduit au financement de " + this, tFutur, valeurFutur);
+            new Compte(compte.nom + " réduit au financement de " + this, tFutur, valeurFutur);
     return new FluxArgent(nom, argentFutur, debut, tFuturMajoréParFin, dateOperation, fluxMensuel);
   }
 
   private static Pair<Argent, LocalDate> add(
-      Pair<Argent, LocalDate> p1, Pair<Argent, LocalDate> p2) {
+          Pair<Argent, LocalDate> p1, Pair<Argent, LocalDate> p2) {
     return Pair.of(p1.first().add(p2.first(), p2.second()), p2.second());
   }
 

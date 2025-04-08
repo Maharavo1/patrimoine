@@ -11,8 +11,8 @@ import school.hei.patrimoine.modele.objectif.Objectivable;
 @ToString
 @EqualsAndHashCode(callSuper = false)
 public abstract sealed class Possession extends Objectivable
-    implements Serializable /*note(no-serializable)*/
-    permits AchatMaterielAuComptant,
+        implements Serializable /*note(no-serializable)*/
+        permits AchatMaterielAuComptant,
         Compte,
         CompteCorrection,
         Correction,
