@@ -40,6 +40,8 @@ public final class FluxArgent extends Possession {
     this(nom, compte, date, date, date.getDayOfMonth(), montant);
   }
 
+
+
   @Override
   public FluxArgent projectionFuture(LocalDate tFutur) {
     var tFuturMajoréParFin = (tFutur.isBefore(fin)) ? tFutur : fin;

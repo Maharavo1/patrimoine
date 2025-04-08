@@ -53,8 +53,15 @@ public class BakoCas extends Cas {
                 2,
                 new Argent(2_125_000, devise()));
 
+        // Salaire mensuel le 2
+        new FluxArgent("Salaire", bni,
+                LocalDate.of(2025, Month.MAY, 2),
+                LocalDate.of(2025, Month.DECEMBER, 2),
+                2,
+                new Argent(2_125_000, devise()));
+
         // Virement épargne le 3
-        new FluxArgent("Épargne", bmoi,
+        new FluxArgent("", bmoi,
                 LocalDate.of(2025, Month.MAY, 3),
                 LocalDate.of(2025, Month.DECEMBER, 3),
                 3,
